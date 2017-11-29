@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./fonts/iconfont.css">
+</head>
+<body>
+    <div class="box">
+        <header>
+            <mfq-header :title=" '我的购物车' "></mfq-header>
+        </header>
+        <section>
+            <mfq-hosipital
+            v-for='(item,idx) in $store.state.hospital_list' 
+            :key='idx' 
+            :name='item.name'
+            :list='item.medical_list'
+            :index='idx'
+            :selectedall='item.selected_all'>
+                 
+            </mfq-hosipital>
+            <div class="bots">
+                <p>
+                    每期还款:￥<span>4000.00</span>/期
+                </p>
+                <ul>
+                    <li>
+                        3期
+                        <span>
+                            0手续费
+                        </span>
+                    </li>
+                    <li>
+                        6期
+                        <span>
+                            0手续费
+                        </span>
+                    </li>
+                    <li>
+                        9期
+                        <span>
+                            0手续费
+                        </span>
+                    </li>
+                    <li>
+                        12期
+                        <span>
+                            0手续费
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <footer>
+            <mfq-footer>{{$store.state.total_price}}</mfq-footer>
+        </footer>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vuex.js"></script>
+    <script src="./Head.js"></script>
+    <script src="./Foot.js"></script>
+    <script src="./medical.js"></script>
+    <script src="./hosipital.js"></script>
+    <script src="./directive.js"></script>
+    <script src="./index.js"></script>
+    <script src="./store.js"></script>
+    <script>
+        new Vue({
+            el:'.box',
+            store:store,
+            data(){
+                return {
+                    total_price:0,
+                    list_data:[]
+                }
+            },
+            created:function(){
+                this.$store.dispatch('fetch_hospital_list')
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>
